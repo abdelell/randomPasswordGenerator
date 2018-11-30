@@ -5,7 +5,7 @@ def randomPasswordGenerator():
     symbols = "-|@.,?/!~#%^&*(){}[]\=*"
     choices = string.ascii_letters + symbols + "1234567890"
     randomLength = random.randrange(10,25)
-
+    #adds a random number of characters to password
     for i in range(randomLength):
         randomChar = random.randrange(len(choices))
         password+=choices[randomChar]
