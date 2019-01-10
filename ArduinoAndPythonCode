@@ -1,0 +1,47 @@
+# Arduino Code
+int turnOnOrOff;
+
+void setup() {
+    Serial.begin(9600);
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, LOW);
+
+    Serial.println("Wassup!, I am Arduino");
+}
+
+void loop() {
+    while (Serial.available()){
+        turnOnOrOff = Serial.read();
+    }
+
+    if (turnOnOrOff == 'on')
+        digitalWrite(LED_BUILTIN, HIGH);
+
+    else if (turnOnOrOff == 'off')
+        digitalWrite(LED_BUILTIN, LOW);
+
+}
+
+# Python Code
+import serial
+import time
+
+ArduinoSerial = serial.Serial('com18', 9600)
+time.sleep(2)
+
+print(ArduinoSerial.readline())
+
+
+while True:
+    turn = input("Enter on to turn ON LED or off to turn OFF LED: ")
+    print("LED is going to turn", turn)
+
+    if (turn == 'on'):  # if the value is on
+        ArduinoSerial.write('on')  # send on
+        print("LED turned on")
+        time.sleep(1)
+
+    if (turn == 'off'):  # if the value is off
+        ArduinoSerial.write('off')  # send off
+        print("LED turned off")
+        time.sleep(1)
